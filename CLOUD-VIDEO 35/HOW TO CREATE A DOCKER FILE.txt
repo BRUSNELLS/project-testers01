@@ -1,0 +1,35 @@
+
+ 
+       DEPLOYING A WEBSITE THEME USING DOCKERFILE
+      --------------------------------------------
+
+Make a folder where the Dockerfile and the website theme will live together named:christmaspiano and inside the folder create the dockerfile file and paste the script below.
+
+  # Getting a base image
+  -----------------------
+FROM nginx:latest
+
+RUN rm -rf /usr/share/nginx/html/*
+
+        # Defining working directory
+       ------------------------------
+
+ WORKDIR /usr/share/nginx/html
+
+     
+        # Copy from host to container
+       -------------------------------
+   COPY . /usr/share/nginx/html
+
+
+        # Expose Port
+       ---------------
+  EXPOSE 80
+
+        # Start nginx
+       ---------------
+CMD ["nginx", "-g", "daemon off;"]
+
+command for building docker image : docker build -t (name of folder the themes and dockerfile is in) .
+
+After buiding docker image then build docker container inside the image. comand for building docker container: docker run --name (container name) -p 8080:8080 (image name):latest
